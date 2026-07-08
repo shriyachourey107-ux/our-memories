@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Favorite Person ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:linear-gradient(to bottom,#ffd6e7,#fff5f8);
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+    text-align:center;
+}
+
+.page{
+    display:none;
+    height:100vh;
+    width:100%;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:20px;
+}
+
+.active{
+    display:flex;
+}
+
+h1{
+    color:#ff2f70;
+    font-size:48px;
+    margin-bottom:25px;
+}
+
+h2{
+    color:#ff2f70;
+    margin-bottom:20px;
+}
+
+p{
+    width:80%;
+    max-width:700px;
+    font-size:24px;
+    line-height:1.6;
+    color:#444;
+}
+
+button{
+
+    margin-top:25px;
+    padding:15px 40px;
+    border:none;
+    border-radius:40px;
+    background:#ff4d88;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:scale(1.07);
+
+}
+
+img{
+
+    width:380px;
+    max-width:90%;
+    height:420px;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,.25);
+    margin-top:15px;
+
+}
+
+#caption{
+
+    margin-top:18px;
+    font-size:22px;
+    color:#d6336c;
+    font-weight:bold;
+
+}
+
+.heart{
+
+    position:absolute;
+    color:red;
+    animation:float 8s linear infinite;
+    opacity:.6;
+    pointer-events:none;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-100px);
+opacity:0;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+
+<div id="page1" class="page active">
+
+<h1 id="message"></h1>
+
+<button onclick="nextPage()">
+Continue ❤️
+</button>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div id="page2" class="page">
+
+<h1>Our Memories ❤️</h1>
+
+<img id="photo" src="images/photo1.jpeg" alt="Memory">
+
+<p id="caption">
+I love you ❤️
+</p>
+
+<button onclick="nextPhoto()">
+Next Memory
+</button>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div id="page3" class="page">
+
+<h1>Reasons I Love You ❤️</h1>
+
+<p id="reason"></p>
+
+<button onclick="nextReason()">
+Next ❤️
+</button>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div id="page4" class="page">
+
+<h1>🧸</h1>
+
+<h2 id="cute">
+Click below ❤️
+</h2>
+
+<button onclick="cuteMessage()">
+Click if you're still angry ❤️
+</button>
+
+<button onclick="lastPage()">
+Continue ❤️
+</button>
+
+</div>
+
+<!-- PAGE 5 -->
+
+<div id="page5" class="page">
+
+<h1>To My Favorite Person ❤️</h1>
+
+<p>
+
+I know things haven't been perfect.<br><br>
+
+I just wanted you to know that every memory we share means so much to me.<br><br>
+
+Thank you for making me laugh.<br>
+
+Thank you for standing beside me.<br>
+
+Thank you for every little moment that became my favorite memory.<br><br>
+
+If you're still upset, I understand.<br>
+
+But I hope this tiny surprise reminds you how much you mean to me. ❤️
+
+</p>
+
+<button onclick="celebrate()">
+Can We Start Again? ❤️
+</button>
+
+</div>
+
+<script>
+// ---------------- INTRO ----------------
+
+const intro = [
+"Hey ❤️",
+"I know things aren't perfect...",
+"But can you give me one minute?",
+"I made something for you..."
+];
+
+let i = 0;
+
+const msg = document.getElementById("message");
+
+function type(){
+
+    msg.innerHTML = intro[i];
+
+    i++;
+
+    if(i < intro.length){
+        setTimeout(type,2000);
+    }
+
+}
+
+type();
+
+
+// ---------------- PAGE CHANGE ----------------
+
+function nextPage(){
+
+    document.getElementById("page1").classList.remove("active");
+    document.getElementById("page2").classList.add("active");
+
+}
+
+
+// ---------------- PHOTOS ----------------
+
+const photos = [
+
+"images/photo1.jpeg",
+"images/photo2.jpeg",
+"images/photo3.jpeg",
+"images/photo4.jpeg",
+"images/photo5.jpeg",
+"images/photo6.jpeg",
+"images/photo7.jpeg",
+"images/photo8.jpeg"
+
+];
+
+const captions = [
+
+"I love you ❤️",
+"The happiest day ❤️",
+"My favorite memory ❤️",
+"You make me smile ❤️",
+"I miss you ❤️",
+"Thank you for everything ❤️",
+"My favorite people ❤️",
+"Forever with you ❤️"
+
+];
+
+let p = 0;
+
+
+// Show first caption
+
+document.getElementById("caption").innerHTML = captions[0];
+
+
+// Check if image exists
+
+const img = document.getElementById("photo");
+
+img.onerror = function(){
+
+    alert("❌ Image not found:\n\n" + photos[p]);
+
+};
+
+
+function nextPhoto(){
+
+    p++;
+
+    if(p < photos.length){
+
+        img.style.opacity = 0;
+
+        setTimeout(function(){
+
+            img.src = photos[p];
+
+            document.getElementById("caption").innerHTML = captions[p];
+
+            img.style.opacity = 1;
+
+        },300);
+
+    }
+
+    else{
+
+        document.getElementById("page2").classList.remove("active");
+
+        document.getElementById("page3").classList.add("active");
+
+    }
+
+}
+
+
+
+// ---------------- REASONS ----------------
+
+const reasons = [
+
+"You always make me smile ❤️",
+
+"You believe in me ❤️",
+
+"You make ordinary days special ❤️",
+
+"You make me feel safe ❤️",
+
+"I love every little thing about you ❤️",
+
+"Thank you for being YOU ❤️"
+
+];
+
+let r = 0;
+
+document.getElementById("reason").innerHTML = reasons[0];
+
+function nextReason(){
+
+    r++;
+
+    if(r < reasons.length){
+
+        document.getElementById("reason").innerHTML = reasons[r];
+
+    }
+
+    else{
+
+        document.getElementById("page3").classList.remove("active");
+
+        document.getElementById("page4").classList.add("active");
+
+    }
+
+}
+
+
+
+// ---------------- CUTE MESSAGES ----------------
+
+const cuteMessages = [
+
+"I miss you ❤️",
+
+"I hope you're smiling ❤️",
+
+"You are my favorite person ❤️",
+
+"I'll always be here ❤️",
+
+"Please don't stay angry forever 🥺❤️",
+
+"Can I have one smile? ❤️"
+
+];
+
+function cuteMessage(){
+
+    const random = Math.floor(Math.random()*cuteMessages.length);
+
+    document.getElementById("cute").innerHTML = cuteMessages[random];
+
+}
+
+
+
+// ---------------- LAST PAGE ----------------
+
+function lastPage(){
+
+    document.getElementById("page4").classList.remove("active");
+
+    document.getElementById("page5").classList.add("active");
+
+}
+
+
+
+// ---------------- CONFETTI HEARTS ----------------
+
+function celebrate(){
+
+    alert("Thank you for reading ❤️");
+
+    for(let i=0;i<120;i++){
+
+        let heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random()*100 + "vw";
+
+        heart.style.fontSize = (20 + Math.random()*25) + "px";
+
+        heart.style.animationDuration = (4 + Math.random()*4) + "s";
+
+        document.body.appendChild(heart);
+
+    }
+
+}
+</script>
+
+</body>
+
+</html>
